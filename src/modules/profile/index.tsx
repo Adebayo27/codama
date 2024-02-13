@@ -50,13 +50,16 @@ export default function ProfilePage() {
       const newData = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
+        email: doc.get('email'),
+        uid: doc.get('uid'),
+        name: doc.get('name')
       }));
+      console.log(newData)
       for (let i = 0; i < newData.length; i++) {
-        if (newData[i]["user"]["uid"] == authId) {
-          const u = newData[i]["user"];
+        if (newData[i].uid == authId) {
           setUser({
-            email: u["email"],
-            name: u["name"],
+            email: newData[i].email,
+            name:  newData[i].name,
             docId: newData[i].id,
           });
         }
