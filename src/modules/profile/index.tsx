@@ -31,7 +31,6 @@ export default function ProfilePage() {
   const [error, setError] = React.useState<string | null>("");
   const [success, setSuccess] = React.useState<boolean>(false);
   const [canUpdate, setCanUpdate] = React.useState<boolean>(false);
-  //   const [docRef, setDocRef] = React.useState<DocumentReference<unknown, { name: string; email: string; uid: string; }>>()
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -43,28 +42,30 @@ export default function ProfilePage() {
     });
   }, [navigate]);
 
-  const getUserData = async () => {
-    // const q = query(collection(db, "users"), where("uid", "==", authId));
+  const getUserData = React.useCallback(async () => {
     await getDocs(collection(db, "users")).then((querySnapshot) => {
-      const newData = querySnapshot.docs.map((doc) => ({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const newData = querySnapshot.docs.map((doc:any) => ({
         ...doc.data(),
         id: doc.id,
-        email: doc.get('email'),
+        email: doc.get('user'),
         uid: doc.get('uid'),
         name: doc.get('name')
       }));
+      
       for (let i = 0; i < newData.length; i++) {
-        if (newData[i].uid == authId) {
+        const user = newData[i]['user']
+        if (user.uid == authId) {
           setUser({
-            email: newData[i].email,
-            name:  newData[i].name,
+            email: user.email,
+            name:  user.name,
             docId: newData[i].id,
           });
           setCanUpdate(true);
         }
       }
     });
-  };
+  }, [authId]);
 
   React.useEffect(() => {
     if (authId !== null && authId.length > 2) {
@@ -72,7 +73,7 @@ export default function ProfilePage() {
       getUserData();
       
     }
-  }, [authId]);
+  }, [authId, getUserData]);
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -110,7 +111,6 @@ export default function ProfilePage() {
       
     } catch (e) {
       setError("Error updating profile");
-    //   console.log(e)
       setSuccess(false);
       setLoading(false);
     }
