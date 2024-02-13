@@ -1,30 +1,59 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Codama
 
-Currently, two official plugins are available:
+Codama Task
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Appendix
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Task
 
-- Configure the top-level `parserOptions` property like this:
+Your task is to create a web application that allows users to authenticate via mobile phone number
+(SMS code verification). Once authenticated, the user should be presented with a "Profile Page"
+containing "Name" and "Email" fields and a "Save" button. The "Save" button must store the form
+data in Firestore, using the phone number as the primary key. Ensure the form allows for the update
+and saving of these fields, with validations in place for non-empty "Name" and a valid "Email".
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+Features to include:
+1. Persistent user login across page refreshes and return visits.
+
+2. A "Logout" button for user sign-out, with functionality to log back in and view previously entered data.
+3. The application should be deployed under a secure HTTPS URL.
+
+
+## Documentation
+
+[Documentation](https://github.com/Adebayo27/codama.git)
+
+1. Clone the repository
+2. cd into the project root folder
+3. Install the dependencies 
+
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/Adebayo27/codama.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Go to the project directory (Frontend)
+
+```bash
+  cd codama
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
+
