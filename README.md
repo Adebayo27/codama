@@ -23,6 +23,7 @@ Features to include:
 
 ## Documentation
 
+[Deployed Version](https://codama-gndu.vercel.app)
 [Documentation](https://github.com/Adebayo27/codama.git)
 
 1. Clone the repository
