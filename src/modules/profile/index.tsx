@@ -60,6 +60,7 @@ export default function ProfilePage() {
             name:  newData[i].name,
             docId: newData[i].id,
           });
+          setCanUpdate(true);
         }
       }
     });
@@ -69,7 +70,7 @@ export default function ProfilePage() {
     if (authId !== null && authId.length > 2) {
       //   const getUser = getDoc(authId);
       getUserData();
-      setCanUpdate(true);
+      
     }
   }, [authId]);
 
@@ -92,6 +93,7 @@ export default function ProfilePage() {
           })
           
         getUserData();
+        setLoading(false);
       } else {
         await addDoc(collection(db, "users"), {
           user: {
@@ -103,10 +105,12 @@ export default function ProfilePage() {
         
         setError(null);
         setSuccess(true);
+        setLoading(false);
       }
-      setLoading(false);
+      
     } catch (e) {
       setError("Error updating profile");
+    //   console.log(e)
       setSuccess(false);
       setLoading(false);
     }
