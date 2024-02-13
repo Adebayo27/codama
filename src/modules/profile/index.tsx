@@ -37,7 +37,6 @@ export default function ProfilePage() {
       if (user) {
         const uid = user.uid;
         setAuthId(uid);
-        console.log("uid", uid);
       } else {
         navigate("/login");
       }
@@ -54,7 +53,6 @@ export default function ProfilePage() {
         uid: doc.get('uid'),
         name: doc.get('name')
       }));
-      console.log(newData)
       for (let i = 0; i < newData.length; i++) {
         if (newData[i].uid == authId) {
           setUser({
@@ -73,7 +71,6 @@ export default function ProfilePage() {
       getUserData();
       setCanUpdate(true);
     }
-    console.log(authId);
   }, [authId]);
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
@@ -93,19 +90,17 @@ export default function ProfilePage() {
             setError(null);
             setSuccess(true);
           })
-          .catch((error) => {
-            console.log(error.message);
-          });
+          
         getUserData();
       } else {
-        const docRef = await addDoc(collection(db, "users"), {
+        await addDoc(collection(db, "users"), {
           user: {
             email: user.email,
             name: user.name,
             uid: authId,
           },
         });
-        console.log("Document written with ID: ", docRef.id);
+        
         setError(null);
         setSuccess(true);
       }

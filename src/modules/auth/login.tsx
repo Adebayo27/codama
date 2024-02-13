@@ -57,7 +57,6 @@ export default function LoginPage() {
 
     try {
       await confirmationResult!.confirm(verificationCode);
-      console.log("Successfully signed in with phone number");
       setLoading(false);
       navigate("/profile");
     } catch (error) {
